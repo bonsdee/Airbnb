@@ -1,36 +1,120 @@
-/* style for banner */
-.banner {
-  background-size: cover;
-  background-position: center;
-  padding: 150px 0;
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #e0e0f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.banner h1 {
-  margin: 0;
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 32px;
-  font-weight: bold;
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.banner p {
-  font-size: 20px;
-  color: white;
-  opacity: .7;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
 }
 
-
-/* style for custom buttons */
-.btn-airbnb {
-  color: white !important;
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: #ef4a86 !important;
-  transition: background 0.3s ease;
+.logo {
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.btn-airbnb:hover {
-  background: #FF385D !important;
-  color: white !important;
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.login-btn {
+    background: white;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+
+.login-btn:hover {
+    background: #ddd;
+}
+
+/* Main Content */
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* Left text section */
+.text-section {
+    width: 50%;
+}
+
+.text-section h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.text-section p {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.explore-btn {
+    background: #ff5a5f;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.explore-btn:hover {
+    background: #e0484d;
+}
+
+/* Right image section */
+.image-section {
+    width: 50%;
+    text-align: center;
+}
+
+.image-section img {
+    width: 100%;
+    border-radius: 10px;
 }
