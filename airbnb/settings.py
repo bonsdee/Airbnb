@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbairbnb',
-        'USER': 'john earl',
-        'PASSWORD': '',
+        'USER': 'root',
+        'PASSWORD': 'Kda00510',
         'HOST': '127.0.0.1',
         'PORT': '3306',
 

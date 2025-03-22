@@ -1,28 +1,44 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOBI - Find Your Perfect Stay</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/@mui/material/5.0.0-alpha.36/material-ui.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Landing Page</title>
+    <link rel="stylesheet" href="landing.css">
 </head>
-
 <body>
-  <div id="root"></div>
+    <header>
+        <div class="logo">
+            <img src="Logo.png" alt="Airbnb Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Stays</a></li>
+                <li><a href="#">Experiences</a></li>
+                <li><a href="#">Become a Host</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- React scripts -->
-  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <section class="hero">
+        <img src="Airbnb.png" alt="Beautiful Stay">
+        <div class="hero-text">
+            <h1>Find Your Perfect Stay</h1>
+            <p>Book unique homes and experiences all around the world.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Where are you going?">
+                <input type="date">
+                <input type="number" placeholder="Guests" min="1">
+                <button>Search</button>
+            </div>
+        </div>
+    </section>
 
-  <!-- React Router -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/6.28.1/react-router.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/6.28.1/react-router-dom.production.min.js"></script>
-
-  <!-- Material UI -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/@mui/material/5.0.0-alpha.36/material-ui.min.js"></script>
-
-  <!-- Babel for JSX support -->
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <footer>
+        <p>© 2025 Airbnb, Inc. All rights reserved.</p>
+    </footer>
+</body>
+</html>
