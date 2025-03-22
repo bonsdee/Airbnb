@@ -23,3 +23,9 @@ def booking_detail(request, booking_id):
 def api_properties(request):
     properties = list(Property.objects.values())
     return JsonResponse({'properties': properties})
+
+def login_view(request):
+    return render(request, 'user/login.html')
+
+def register_view(request):
+    return render(request, 'user/register.html')
