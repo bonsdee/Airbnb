@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for property in properties %}
+    <h2>{{ property.name }}</h2>
+    <p>{{ property.location }}</p>
+    <p>{{ property.description }}</p>
+    <p>Price: ${{ property.price_per_night }}</p>
+    <a href="{% url 'book_property' property.id %}">Book Now</a>
+{% endfor %}
+
+
+</body>
+</html>
