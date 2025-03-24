@@ -22,7 +22,8 @@
             {% endif %}
 
             <form action="{% url 'login' %}" method="POST">
-                {% csrf_token %}
+
+                {% csrf_token %}<!-- need to accept POST in Django -->
 
                 <div class="input-group">
                     <label for="email">Email</label>

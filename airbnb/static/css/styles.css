@@ -14,9 +14,9 @@ body {
     width: 100%;
     max-width: 400px;
     background: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -24,6 +24,17 @@ body {
 .form-box h2 {
     margin-bottom: 20px;
     font-size: 24px;
+    font-weight: bold;
+}
+
+/* Error Message Styling */
+.messages {
+    background: #ffcccc;
+    color: #d32f2f;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
 }
 
 /* Input Fields */
@@ -36,25 +47,39 @@ body {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
+    color: #333;
 }
 
 .input-group input {
     width: 100%;
-    padding: 10px;
+    max-width: 370px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+
+}
+
+/* Smooth Focus Effect */
+.input-group input:focus {
+    border-color: #ff5a5f;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(255, 90, 95, 0.5);
 }
 
 /* Button */
 .btn {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #ff5a5f;
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
 .btn:hover {
@@ -64,13 +89,23 @@ body {
 /* Links */
 p {
     margin-top: 10px;
+    font-size: 14px;
 }
 
 p a {
     color: #ff5a5f;
     text-decoration: none;
+    font-weight: bold;
 }
 
 p a:hover {
     text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 420px) {
+    .container {
+        max-width: 90%;
+        padding: 20px;
+    }
 }
