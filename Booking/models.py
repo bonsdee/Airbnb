@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# 🏠 Owner Model
+#  Owner Model
 class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=20)
@@ -9,7 +9,7 @@ class Owner(models.Model):
     def __str__(self):
         return self.user.username
 
-# 👤 Guest Model
+#  Guest Model
 class Guest(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=20)
@@ -17,7 +17,7 @@ class Guest(models.Model):
     def __str__(self):
         return self.user.username
 
-# 🏡 Property Model
+#  Property Model
 class Property(models.Model):
     name = models.CharField(max_length=255)
     location = models.TextField()
@@ -28,7 +28,7 @@ class Property(models.Model):
     def __str__(self):
         return self.name
 
-# 📆 Booking Model
+#  Booking Model
 class Booking(models.Model):
     guest = models.ForeignKey(Guest, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
@@ -44,7 +44,7 @@ class Booking(models.Model):
     def __str__(self):
         return f"Booking {self.id} - {self.guest.user.username} at {self.property.name}"
 
-# 💳 Payment Model
+# Payment Model
 class Payment(models.Model):
     guest = models.ForeignKey(Guest, on_delete=models.CASCADE)
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)

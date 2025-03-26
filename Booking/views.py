@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import Property, Booking, Payment, Guest, Owner
 from .forms import GuestRegistrationForm, OwnerRegistrationForm, PropertyForm, BookingForm, PaymentForm
 
-# 👤 Guest Sign-up
+# Guest Sign-up
 def guest_signup(request):
     if request.method == 'POST':
         form = GuestRegistrationForm(request.POST)
@@ -17,7 +17,7 @@ def guest_signup(request):
         form = GuestRegistrationForm()
     return render(request, 'booking/guest_signup.html', {'form': form})
 
-# 🏠 Owner Sign-up
+#  Owner Sign-up
 def owner_signup(request):
     if request.method == 'POST':
         form = OwnerRegistrationForm(request.POST)
@@ -30,12 +30,12 @@ def owner_signup(request):
         form = OwnerRegistrationForm()
     return render(request, 'booking/owner_signup.html', {'form': form})
 
-# 🏡 List Properties
+#  List Properties
 def property_list(request):
     properties = Property.objects.all()
     return render(request, 'booking/property_list.html', {'properties': properties})
 
-# 📆 Create Booking
+#  Create Booking
 def create_booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -46,7 +46,7 @@ def create_booking(request):
         form = BookingForm()
     return render(request, 'booking/booking_form.html', {'form': form})
 
-# 💳 Make Payment
+#  Make Payment
 def make_payment(request):
     if request.method == 'POST':
         form = PaymentForm(request.POST)
