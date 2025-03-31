@@ -63,3 +63,28 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Payment {self.id} - {self.guest.user.username} ({self.payment_status})"
+
+
+class Review(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE, related_name="reviews")
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="reviews")
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # 1 to 5 stars
+    comment = models.TextField()
+    review_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.guest.name} for {self.property.name}"
+
+class Reservation(models.Model):
+    reservation_id = models.AutoField(primary_key=True)
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE, related_name="reservations")
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="reservations")
+    reservation_date = models.DateField(auto_now_add=True)
+    status = models.CharField(
+        max_length=50,
+        choices=[('Pending', 'Pending'), ('Confirmed', 'Confirmed'), ('Cancelled', 'Cancelled')]
+    )
+
+    def __str__(self):
+        return f"Reservation {self.reservation_id} by {self.guest.name}"
