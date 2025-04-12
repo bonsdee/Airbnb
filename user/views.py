@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import Property, Booking
+from .models import  Profile
 
 
 # Home Page View: it go to the the index
@@ -31,32 +31,36 @@ def api_properties(request):
     properties = list(Property.objects.values())
     return JsonResponse({'properties': properties})
 """
-
 # Login View: Authenticates the user using email and password.
+from Booking.models import Owner  # Import the Owner model
+
 def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        # Ensure email and password fields are filled
         if not email or not password:
             messages.error(request, "Email and password are required.")
             return redirect('login')
 
         try:
-            # Retrieve the user by email
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             user = None
 
         if user is not None:
-            # Authenticate using the found user's username
             authenticated_user = authenticate(request, username=user.username, password=password)
 
             if authenticated_user is not None:
                 login(request, authenticated_user)
                 messages.success(request, f"Login successful! Welcome back, {authenticated_user.first_name}")
-                return redirect('landing')
+
+                # 🔥 Redirect based on role (Owner → add_property)
+                try:
+                    Owner.objects.get(user=authenticated_user)
+                    return redirect('add_property')
+                except Owner.DoesNotExist:
+                    return redirect('landing')
 
         messages.error(request, "Invalid email or password. Please try again.")
         return redirect('login')
@@ -73,28 +77,39 @@ def landing_page(request):
 
 
 #Handles user sign-up and automatic login after registration.
+from Booking.models import Owner  # Again, make sure it's imported
+
 def register_view(request):
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        role = request.POST.get('role')
 
-        # Check if the email is already registered
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already registered.")
             return redirect('register')
 
-        # Create a user with email as the username
         user = User.objects.create_user(username=email, email=email, password=password)
         user.first_name = full_name
         user.save()
 
+        # Save profile
+        Profile.objects.create(user=user, role=role)
+
         # Log in the new user
         login(request, user)
+
+        # 🔥 Create Owner model instance if user is an owner
+        if role.lower() == 'owner':
+            Owner.objects.create(user=user, contact_number='')  # Or get from the form
+            return redirect('add_property')
+
         messages.success(request, f"Registration successful! Welcome, {full_name}")
-        return redirect('home')
+        return redirect('landing')
 
     return render(request, 'user/register.html')
+
 
 
 # Logout View: Logs out the user and redirects to the home page.

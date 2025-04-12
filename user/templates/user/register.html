@@ -12,7 +12,6 @@
         <div class="form-box">
             <h2>Create an Account</h2>
 
-            <!-- Add method="POST" and include {% csrf_token %} -->
             <form method="POST" action="{% url 'register' %}">
                 {% csrf_token %}
 
@@ -29,6 +28,15 @@
                 <div class="input-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="role">Register as</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select a role</option>
+                        <option value="guest">Guest</option>
+                        <option value="owner">Owner</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn">Register</button>
