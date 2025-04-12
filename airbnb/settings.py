@@ -83,13 +83,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbairbnb',
-        'USER': 'root',
-        'PASSWORD': 'Kda00510',
+        'USER': 'newuser',
+        'PASSWORD': '123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-
     }
 }
+
+
+
 
 
 # Password validation
@@ -216,18 +218,6 @@ WSGI_APPLICATION = 'airbnb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbairbnb',
-        'USER': 'root',
-        'PASSWORD': 'Kda00510',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-
-    }
-}
 
 
 # Password validation
