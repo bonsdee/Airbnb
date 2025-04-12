@@ -45,7 +45,7 @@ nav ul li a:hover {
 }
 
 .hero {
-    position: top;
+    position: relative;
     text-align: center;
     color: white;
 }
@@ -79,7 +79,14 @@ nav ul li a:hover {
     margin: 10px 0 20px;
 }
 
-.search-bar input, .search-bar button {
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-bar input,
+.search-bar button {
     padding: 12px;
     border: none;
     font-size: 16px;
@@ -104,6 +111,7 @@ nav ul li a:hover {
 .search-bar button:hover {
     background: #d32f44;
 }
+
 .hero-title {
     text-align: center;
     font-size: 2.5rem;
@@ -124,7 +132,67 @@ footer {
     background: #222;
     color: white;
     font-size: 14px;
-    position: absolute;
-    bottom: 0;
     width: 100%;
+}
+
+.listings {
+    padding: 40px 20px;
+}
+
+.listings h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.listing-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 30px;
+    overflow-x: auto;
+    padding: 10px;
+    scroll-behavior: smooth;
+}
+
+
+.listing {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    flex: 0 0 auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.listing:hover {
+    transform: translateY(-5px);
+}
+
+.listing img {
+    width: 100%;
+    border-radius: 8px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.listing h3 {
+    margin-top: 15px;
+    font-size: 1.2em;
+}
+
+.listing p {
+    font-size: 0.95em;
+    color: #555;
+}
+
+.listing button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #FF5A5F;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
 }

@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import home, login_view, register_view, landing_page
+
+from Booking import views
+from .views import home, login_view, register_view, landing_page,property_listings
 
 urlpatterns = [
     path('', home, name='home'),
@@ -9,4 +11,6 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
     path('landing/', landing_page, name='landing'),
+    path('property-listings/', views.property_listings, name='property_list'),
+
 ]

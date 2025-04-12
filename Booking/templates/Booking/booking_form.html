@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>booking form</title>
+</head>
+<body>
+<h2>Book {{ property.title }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- You can add custom fields if needed -->
+    <button type="submit">Proceed to Payment</button>
+</form>
+
+</body>
+</html>

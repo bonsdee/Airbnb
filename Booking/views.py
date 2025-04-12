@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from .models import Property, Booking, Payment, Guest, Owner
@@ -31,28 +31,70 @@ def owner_signup(request):
     return render(request, 'booking/owner_signup.html', {'form': form})
 
 #  List Properties
-def property_list(request):
+def property_listings(request):
     properties = Property.objects.all()
-    return render(request, 'booking/property_list.html', {'properties': properties})
+    return render(request, 'booking/property_listings.html', {'properties': properties})
+
+
+# dets_ properts
+
+def property_details(request, id):
+    property = get_object_or_404(Property, pk=id)
+    return render(request, 'booking/property_details.html', {'property': property})
+
 
 #  Create Booking
-def create_booking(request):
+# views.py
+
+def create_booking(request, property_id):
+    property = get_object_or_404(Property, id=property_id)  # Fetch property by ID
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('property_list')
+            booking = form.save(commit=False)
+            booking.property = property
+            booking.save()
+            return redirect('payment')  # Redirect to payment form or confirmation page
     else:
         form = BookingForm()
-    return render(request, 'booking/booking_form.html', {'form': form})
+    return render(request, 'booking/booking_form.html', {'form': form, 'property': property})
+
 
 #  Make Payment
-def make_payment(request):
+# views.py
+
+def make_payment(request, booking_id):
+    booking = Booking.objects.get(id=booking_id)  # Fetch the booking using the booking ID
     if request.method == 'POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('property_list')
+            payment = form.save(commit=False)
+            payment.booking = booking  # Link payment to the booking
+            payment.guest = booking.guest  # Link payment to the guest
+            payment.payment_status = 'Pending'  # Set payment status to 'Pending'
+            payment.save()
+            booking.booking_status = 'Confirmed'  # After payment, change booking status to 'Confirmed'
+            booking.save()
+            return redirect('payment_success')
     else:
         form = PaymentForm()
-    return render(request, 'booking/payment_form.html', {'form': form})
+
+    return render(request, 'booking/payment_form.html', {'form': form, 'booking': booking})
+
+def payment_success(request):
+    return render(request, 'booking/payment_success.html')
+
+def book_property(request, id):
+    property = get_object_or_404(Property, id=id)
+
+    if request.method == 'POST':
+        # Handle booking form submission here and redirect to payment
+        return redirect('booking:payment', id=property.id)
+
+    return render(request, 'booking/book_property.html', {'property': property})
+def payment(request, id):
+    property = get_object_or_404(Property, id=id)
+    if request.method == "POST":
+        # pretend we process payment
+        return render(request, 'booking/payment_success.html')
+    return render(request, 'booking/payment_form.html', {'property': property})

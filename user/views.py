@@ -15,7 +15,7 @@ def home(request):
 # Property List View: Retrieves all properties and displays them in a list.
 def property_list(request):
     properties = Property.objects.all()
-    return render(request, 'user/property_list.html', {'properties': properties})
+    return render(request, 'user/property_listings.html', {'properties': properties})
 """
 
 """
@@ -103,3 +103,7 @@ def logout_view(request):
     logout(request)
     messages.success(request, "You have been logged out.")
     return redirect('home')
+
+def property_listings(request):
+    properties = Property.objects.all()  # Fetch all properties
+    return render(request, 'property_listings.html', {'properties': properties})

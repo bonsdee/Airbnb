@@ -17,16 +17,18 @@ class Guest(models.Model):
     def __str__(self):
         return self.user.username
 
-#  Property Model
+#property model
 class Property(models.Model):
-    name = models.CharField(max_length=255)
-    location = models.TextField()
+    name = models.CharField(max_length=100)
     description = models.TextField()
+    location = models.CharField(max_length=255)
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
 
     def __str__(self):
         return self.name
+
 
 #  Booking Model
 class Booking(models.Model):

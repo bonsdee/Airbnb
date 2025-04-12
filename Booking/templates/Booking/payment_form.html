@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Page</title>
+</head>
+<body>
+    <h1>Payment for {{ property.name }}</h1>
+    <p>Location: {{ property.location }}</p>
+    <p>Price per night: ${{ property.price_per_night }}</p>
+
+    <p>This is just a sample payment page.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Payment</button>
+    </form>
+</body>
+</html>

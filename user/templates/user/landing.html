@@ -1,44 +1,71 @@
-    <!DOCTYPE html>
-    {% load static %}
+<!DOCTYPE html>
+{% load static %}
 
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Airbnb Landing Page</title>
-        <link rel="stylesheet" href="{% static 'css/landing.css' %}">
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <img src="{% static 'css/Logo.png' %}" alt="Airbnb Logo">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Landing Page</title>
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'css/Logo.png' %}" alt="Airbnb Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Stays</a></li>
+                <li><a href="#">Experiences</a></li>
+                <li><a href="#">Become a Host</a></li>
+                <li><a href="{% url 'login' %}"><button>Log out</button></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="{% static 'css/house2.png' %}" alt="Beautiful Stay">
+        <div class="hero-text">
+            <h1>Find Your Perfect Stay</h1>
+            <p>Book unique homes and experiences all around the world.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Where are you going?">
+                <input type="date">
+                <input type="number" placeholder="Guests" min="1">
+                <button>Search</button>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Stays</a></li>
-                    <li><a href="#">Experiences</a></li>
-                    <li><a href="#">Become a Host</a></li>
-                    <li><a href="{% url 'login' %}"><button>Log out</button></a></li>
-                </ul>
-            </nav>
-        </header>
+            <!-- Add Book BnB Button here -->
+<a href="{% url 'property_list' %}"><button class="btn-book-bnb">Book BnB</button></a>
+        </div>
+    </section>
 
-        <section class="hero">
-            <img src="{% static 'css/Airbnb.png' %}" alt="Beautiful Stay">
-            <div class="hero-text">
-                <h1>Find Your Perfect Stay</h1>
-                <p>Book unique homes and experiences all around the world.</p>
-                <div class="search-bar">
-                    <input type="text" placeholder="Where are you going?">
-                    <input type="date">
-                    <input type="number" placeholder="Guests" min="1">
-                    <button>Search</button>
-                </div>
+    <!-- Airbnb Listings Section -->
+    <section class="listings">
+        <h2>Featured Stays</h2>
+        <div class="listing-container">
+            <div class="listing">
+                <img src="{% static 'css/house1.png' %}" alt="Cozy Cottage">
+                <h3>Cozy Cottage in the Woods</h3>
+                <p>Peaceful hideaway surrounded by nature. 2 beds · 1 bath</p>
+                <button>Book Now</button>
             </div>
-        </section>
+            <div class="listing">
+                <img src="{% static 'css/house2.png' %}" alt="Modern Apartment">
+                <h3>Modern Apartment in the City</h3>
+                <p>Stylish and central. Walk to restaurants and shops. 1 bed · 1 bath</p>
+                <button>Book Now</button>
+            </div>
+            <div class="listing">
+                <img src="{% static 'css/house1.png' %}" alt="Beachfront Villa">
+                <h3>Beachfront Villa</h3>
+                <p>Wake up to ocean views. 3 beds · 2 baths</p>
+                <button>Book Now</button>
+            </div>
+        </div>
+    </section>
 
-        <footer>
-            <p>© 2025 Airbnb, Inc. All rights reserved.</p>
-        </footer>
-    </body>
-    </html>
+    <footer>
+        <p>© 2025 Airbnb, Inc. All rights reserved.</p>
+    </footer>
+</body>
+</html>

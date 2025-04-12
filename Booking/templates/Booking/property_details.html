@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>{{ property.name }}</h1>
+<p>{{ property.description }}</p>
+<p>Location: {{ property.location }}</p>
+<p>Price per night: ${{ property.price_per_night }}</p>
+<a href="{% url 'booking:book_property' property.id %}" class="btn">Book Now</a>
+
+
+</body>
+</html>

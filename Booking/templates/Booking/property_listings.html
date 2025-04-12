@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listings</title>
+</head>
+<body>
+    <h1>Property Listings</h1>
+
+    <div class="property-list">
+        {% for property in properties %}
+            <div class="property">
+                <h2>{{ property.name }}</h2>
+                <p>Location: {{ property.location }}</p>
+                <p>Description: {{ property.description }}</p>
+                <p>Price per night: ${{ property.price_per_night }}</p>
+                <a href="{% url 'booking:property_details' property.id %}">View Details</a>
+            </div>
+        {% empty %}
+            <p>No properties available.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
