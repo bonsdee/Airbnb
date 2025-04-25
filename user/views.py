@@ -79,37 +79,40 @@ def landing_page(request):
 #Handles user sign-up and automatic login after registration.
 from Booking.models import Owner  # Again, make sure it's imported
 
+# Register View
 def register_view(request):
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        role = request.POST.get('role')
+        role = request.POST.get('role')  # Get the role (owner or guest)
 
+        # Check if email is already taken
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already registered.")
             return redirect('register')
 
+        # Create a new user
         user = User.objects.create_user(username=email, email=email, password=password)
         user.first_name = full_name
         user.save()
 
-        # Save profile
+        # Create a profile for the user with their role (owner or guest)
         Profile.objects.create(user=user, role=role)
 
-        # Log in the new user
+        # Log in the user automatically after registration
         login(request, user)
 
-        # 🔥 Create Owner model instance if user is an owner
+        # If the role is 'owner', create an associated Owner instance
         if role.lower() == 'owner':
-            Owner.objects.create(user=user, contact_number='')  # Or get from the form
-            return redirect('add_property')
+            Owner.objects.create(user=user, contact_number='')  # Create an Owner instance
+            return redirect('add_property')  # Redirect to add_property page for owners
 
+        # If the role is not 'owner' IT WILL GO TO LANDING PAGE
         messages.success(request, f"Registration successful! Welcome, {full_name}")
         return redirect('landing')
 
     return render(request, 'user/register.html')
-
 
 
 # Logout View: Logs out the user and redirects to the home page.

@@ -7,26 +7,36 @@
     <link rel="stylesheet" href="{% static 'css/add_property.css' %}">
 </head>
 <body>
+    <!-- Header -->
     <div class="header">
         <img src="{% static 'css/Logo.png' %}" alt="Logo" class="logo">
+        <div class="nav-links">
+            <a href="#">Stays</a>
+            <a href="#">Experiences</a>
+            <a href="#">Become a Host</a>
+            <a href="{% url 'login' %}"><button>Log out</button></a>
+        </div>
     </div>
 
+    <!-- Background overlay and centered form -->
     <div class="container">
-        <h2>Add Property</h2>
+        <div class="form-box">
+            <h2>Add Property</h2>
 
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li class="{{ message.tags }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn">Add Property</button>
-        </form>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">Add Property</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
