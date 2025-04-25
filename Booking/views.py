@@ -75,7 +75,7 @@ def add_property(request):
             property.owner = owner
             property.save()
             messages.success(request, "Property added successfully.")
-            return redirect('property_list')
+            form = PropertyForm()  # clear the form after success
     else:
         form = PropertyForm()
 
