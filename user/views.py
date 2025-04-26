@@ -5,7 +5,11 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import Property, Booking
-
+from .models import UserActivityLog
+from django.shortcuts import render, redirect
+from .models import Property, Owner  # adjust if model is in Booking
+from .forms import PropertyForm      # make sure this form exists
+from django.contrib.auth.decorators import login_required
 
 # Home Page View: it go to the the index
 def home(request):
@@ -100,6 +104,9 @@ def register_view(request):
 # Logout View: Logs out the user and redirects to the home page.
 @login_required
 def logout_view(request):
+    # Log the logout action
+    UserActivityLog.objects.create(user=request.user, action="Logout")
+
     logout(request)
     messages.success(request, "You have been logged out.")
     return redirect('home')
@@ -107,3 +114,20 @@ def logout_view(request):
 def property_listings(request):
     properties = Property.objects.all()  # Fetch all properties
     return render(request, 'property_listings.html', {'properties': properties})
+@login_required
+def hosting_dashboard(request):
+    return render(request, 'user/hosting_dashboard.html')
+
+@login_required
+def add_property(request):
+    if request.method == 'POST':
+        form = PropertyForm(request.POST)
+        if form.is_valid():
+            property = form.save(commit=False)
+            owner = Owner.objects.get(email=request.user.email)  # or based on user FK
+            property.owner = owner
+            property.save()
+            return redirect('hosting_dashboard')
+    else:
+        form = PropertyForm()
+    return render(request, 'user/add_property.html', {'form': form})

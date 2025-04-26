@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hosting Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/hosting.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Hosting!</h1>
+        <p>Manage your listings and start earning.</p>
+    </header>
+
+    <main>
+        <div class="dashboard-actions">
+            <a href="{% url 'add_property' %}"><button>List a New Property</button></a>
+            <a href="#"><button>View My Properties</button></a>
+            <a href="#"><button>Manage Bookings</button></a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Airbnb, Inc. All rights reserved.</p>
+    </footer>
+</body>
+</html>

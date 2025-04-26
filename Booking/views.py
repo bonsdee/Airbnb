@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from .models import Property, Booking, Payment, Guest, Owner
 from .forms import GuestRegistrationForm, OwnerRegistrationForm, PropertyForm, BookingForm, PaymentForm
+from datetime import date  # ✅ Add this!
 
 # Guest Sign-up
 def guest_signup(request):
@@ -84,14 +85,29 @@ def make_payment(request, booking_id):
 def payment_success(request):
     return render(request, 'booking/payment_success.html')
 
+
 def book_property(request, id):
     property = get_object_or_404(Property, id=id)
 
-    if request.method == 'POST':
-        # Handle booking form submission here and redirect to payment
-        return redirect('booking:payment', id=property.id)
+    if request.user.is_authenticated:
+        guest = get_object_or_404(Guest, user=request.user)
 
-    return render(request, 'booking/book_property.html', {'property': property})
+        # Create Booking directly (example dates, you can adjust)
+        booking = Booking.objects.create(
+            guest=guest,
+            property=property,
+            check_in_date=date.today(),  # Example: Today
+            check_out_date=date.today(),  # Example: Today (or another logic)
+            total_price=property.price_per_night,  # Assume 1 night
+            booking_status='Pending'
+        )
+
+        return redirect('booking:make_payment', booking_id=booking.id)
+
+    else:
+        return redirect('login')  # If user not logged in, redirect to login
+
+
 def payment(request, id):
     property = get_object_or_404(Property, id=id)
     if request.method == "POST":

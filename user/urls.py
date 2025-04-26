@@ -1,6 +1,5 @@
 from django.urls import path
-
-from Booking import views
+from . import views
 from .views import home, login_view, register_view, landing_page,property_listings
 
 urlpatterns = [
@@ -12,5 +11,8 @@ urlpatterns = [
     path('register/', register_view, name='register'),
     path('landing/', landing_page, name='landing'),
     path('property-listings/', views.property_listings, name='property_list'),
+    path('hosting/', views.hosting_dashboard, name='hosting_dashboard'),
+    path('hosting/add-property/', views.add_property, name='add_property'),
+
 
 ]

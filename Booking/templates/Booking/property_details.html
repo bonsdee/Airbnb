@@ -9,7 +9,10 @@
 <p>{{ property.description }}</p>
 <p>Location: {{ property.location }}</p>
 <p>Price per night: ${{ property.price_per_night }}</p>
-<a href="{% url 'booking:book_property' property.id %}" class="btn">Book Now</a>
+<form method="post" action="{% url 'booking:book_property' property.id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn">Book Now</button>
+</form>
 
 
 </body>
