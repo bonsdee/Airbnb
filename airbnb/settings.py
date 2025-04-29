@@ -222,9 +222,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbairbnb',
         'USER': 'root',
-        'PASSWORD': 'Kda00510',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '3307',
 
     }
 }
