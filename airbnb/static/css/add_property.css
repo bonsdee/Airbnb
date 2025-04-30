@@ -11,18 +11,22 @@ body {
     color: #333;
 }
 
-/* Header */
 .header {
-    background-color: #ff5a5f;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 30px;
+    background: #ff385c;
     color: white;
+    padding: 10px 20px;  /* Adjust padding to fix header size */
+    height: 60px;  /* Set a fixed height for the header */
+    border-radius: 10px;
 }
 
 .logo {
-    height: 30px;
+    font-size: 18px; /* Set the font size to a normal size (won't affect image) */
+    font-weight: bold;
+    width: 100px; /* Set a fixed width for the logo */
+    height: auto; /* Maintain the aspect ratio */
 }
 
 .nav-links a {
@@ -64,9 +68,10 @@ body {
 /* Form box */
 .form-box {
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 30px 35px;
+    padding: 5px 50px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    height:100%;
     width: 100%;
     max-width: 500px;
 }
@@ -92,9 +97,8 @@ body {
     background-color: #f9f9f9;
 }
 
-/* Limit textarea height */
 .form-box textarea {
-    height: 80px;
+    height: 20px;
 }
 
 /* Submit button */
