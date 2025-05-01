@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Property, Booking, Payment, Guest, Owner
 from .forms import GuestRegistrationForm, OwnerRegistrationForm, PropertyForm, BookingForm, PaymentForm
+from django.db import connection
+
 
 # Guest Sign-up
 def guest_signup(request):
@@ -72,24 +74,34 @@ def make_payment(request):
 @login_required
 def add_property(request):
     try:
-        # Check if the logged-in user is an owner
         owner = Owner.objects.get(user=request.user)
     except Owner.DoesNotExist:
-        # If the user is not an owner, show an error message and redirect them to the home page
         messages.error(request, "Only owners can add properties.")
         return redirect('home')
 
     if request.method == 'POST':
         form = PropertyForm(request.POST)
         if form.is_valid():
-            # If the form is valid, save the property but associate it with the current owner
-            property = form.save(commit=False)
-            property.owner = owner  # Set the owner of the property to the current logged-in user
-            property.save()  # Save the property to the database
-            # Show a success message and reset the form
-            messages.success(request, "Property added successfully.")
-            form = PropertyForm()  # clear the form after success
+            name = form.cleaned_data['name']
+            location = form.cleaned_data['location']
+            description = form.cleaned_data['description']
+            price = form.cleaned_data['price_per_night']
+
+            try:
+                with connection.cursor() as cursor:
+                    # Call the stored procedure
+                    cursor.callproc('AddProperty', [
+                        name,
+                        location,
+                        description,
+                        price,
+                        owner.id
+                    ])
+                messages.success(request, "Property added successfully using stored procedure.")
+                return redirect('add_property')  # Redirect to clear the form after success
+            except Exception as e:
+                messages.error(request, f"Database Error: {e}")
     else:
-        form = PropertyForm()  # Empty form for GET requests
+        form = PropertyForm()
 
     return render(request, 'booking/add_property.html', {'form': form})

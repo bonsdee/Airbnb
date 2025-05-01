@@ -63,3 +63,21 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Payment {self.id} - {self.guest.user.username} ({self.payment_status})"
+
+class Review(models.Model):
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField()  # Usually 1 to 5
+    comment = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.guest.user.username} for {self.property.name}"
+
+class Reserve(models.Model):
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
+    special_requests = models.TextField(blank=True)
+    reserved_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Reserver for Booking {self.booking.id} - {self.booking.guest.user.username}"
