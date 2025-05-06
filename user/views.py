@@ -60,10 +60,14 @@ def login_view(request):
             if authenticated_user is not None:
                 login(request, authenticated_user)
                 messages.success(request, f"Login successful! Welcome back, {authenticated_user.first_name}")
-                return redirect('landing')
+                # Redirect user to the property listings page after login
+                return redirect('booking:property_listings')  # This will take them to the property listings page
+            else:
+                messages.error(request, "Invalid email or password. Please try again.")
+        else:
+            messages.error(request, "Invalid email or password. Please try again.")
 
-        messages.error(request, "Invalid email or password. Please try again.")
-        return redirect('login')
+        return redirect('login')  # Redirect to login page if there's any error
 
     return render(request, 'user/login.html')
 
