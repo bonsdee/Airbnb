@@ -55,7 +55,7 @@ def login_view(request):
                 login(request, authenticated_user)
                 messages.success(request, f"Login successful! Welcome back, {authenticated_user.first_name}")
 
-                # 🔥 Redirect based on role (Owner → add_property)
+                # Redirect based on role (Owner → add_property)
                 try:
                     Owner.objects.get(user=authenticated_user)
                     return redirect('add_property')
